@@ -15,8 +15,8 @@ import { getCenter } from 'ol/extent';
 
 import { points } from '../lib/data';
 
-import ActiveIcon from '../assets/active.svg';
-import InactiveIcon from '../assets/inactive.svg';
+import ActiveIcon from '../../public/icons/active.svg';
+import InactiveIcon from '../../public/icons/inactive.svg';
 
 /**
  * MapComponent is a React functional component that renders an interactive map using OpenLayers.
