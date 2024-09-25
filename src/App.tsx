@@ -1,10 +1,13 @@
-import { Button } from './components/ui/button';
+import MapComponent from './components/Map';
 
 function App() {
   return (
     <div>
-      <Button> Shadcn</Button>
-      Offline Map
+      <MapComponent />
+      <div id='popup' className='ol-popup' style={{ backgroundColor: '#fff' }}>
+        <a href='#' id='popup-closer' className='ol-popup-closer'></a>
+        <div id='popup-content'></div>
+      </div>
     </div>
   );
 }
