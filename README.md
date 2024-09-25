@@ -1,29 +1,30 @@
-Test Task for React JS front-end developer (small map application).
+# Mini Map Application
 
-Make a mini-app application
+## Overview
 
-General requirements:
-Stack - React JS and other React-related packages. 
-TypeScript usage is obligatory (added 16.09.2024)
-Tailwind css is preferred.
-Use version control and publish project in Github, send us a link for done solution.
-Add solution front-end pictures of done solution to README so, that it is visible in GitHub
-It is allowed to use boilerplates and packages that simplify development. All installations of such tools should be done by initial commit or after that with next commit.
-Divide your development into different parts by commits.
-Solution should have file and code structure by your choice.
-Front-end interface should be adaptive (phone and desktop mode, tablet not needed)
-Solution interface design is important, but is not the main focus of this task. We are looking at you technical approach, solution structure and architecture.
+This project is a mini-map application built with **React**, **TypeScript**, and **Tailwind CSS**. It utilizes **OpenLayers** for rendering **OpenStreetMap**, showcasing various features and providing an adaptive front-end interface.
+
+## General Requirements
+
+- **Stack**: React JS, TypeScript, and Tailwind CSS
+- **Version Control**: Git, with the project hosted on GitHub
+- **Adaptive Design**: Mobile and desktop support (tablet not required)
+- **Technical Focus**: Solution structure and architecture
+- **Pictures**: Include front-end screenshots in the README
+
+## Task Description
+
+### Features Implemented
+
+- ✅ **Map Rendering**: Utilizes OpenStreetMap through OpenLayers.
+- ✅ **Zoom Controls**: Zoom in/out buttons for both desktop and mobile layouts.
+- ✅ **Dynamic Points**: Displays points from sample data on the map.
+- ✅ **Initial Focus**: The map focuses on the displayed points upon loading.
+- ✅ **Status Indicators**: Points are marked by status using different colors.
+- ❌ **Point Interaction**: Clicking on a point shows comments and allows status updates.
+- ❌ **Offline Mode**: The app functions offline, allowing refresh.
+- ❌ **Local Storage**: Remembers changes to status and comments.
+- ❌ **PWA Support**: Configured for iOS/Android compatibility.
+- ❌ **End-to-End Test**: Basic test cases to validate functionality.
 
 
-Task description:
-Make a front-end single page application, which uses https://www.openstreetmap.org/ map.
-Show zoom in/out buttons for desktop and mobile layout.
-Show points from sample data on the map (json data below). Use https://openlayers.org/ for rendering
-When map opens it should focus on these points (fit all to view)
-Status should be marked by color
-Click on the point should allow to see the comment and change the status and comment.
-Make app to work in offline mode. 
-Should allow to refresh the page when device is offline
-Should remember status and comments changes done by user.
-Advanced level: write one end-to-end test.
-Advanced: add PWA support for IOS/Android..
