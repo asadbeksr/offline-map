@@ -18,8 +18,10 @@ function App() {
 
   return (
     <div>
-      {isOffline && (
-        <div className='bg-red-500 fixed bottom-0 text-green-500'>You are currently offline.</div>
+       {isOffline && (
+        <div className='bg-red-500 text-white font-bold fixed z-10 bottom-0 w-full h-10 mx-auto flex justify-center self-center items-center'>
+          You are currently offline.
+        </div>
       )}
 
       <MapComponent />
