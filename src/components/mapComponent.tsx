@@ -21,12 +21,13 @@ import {
   OverviewMap,
   ZoomSlider,
   defaults as defaultControls,
-} from 'ol/control.js';
+} from 'ol/control';
 import {
   DblClickDragZoom,
   defaults as defaultInteractions,
-} from 'ol/interaction.js';
+} from 'ol/interaction';
 import Popup from './ui/popup';
+import { X as CloseIcon } from 'lucide-react';
 
 interface MapComponentProps {
   children?: React.ReactNode;
@@ -34,14 +35,6 @@ interface MapComponentProps {
   points?: MapPoint[];
 }
 
-/**
- * MapComponent renders an interactive map using OpenLayers.
- *
- * Props:
- * - `children`: Optional child components to render.
- * - `zoom`: Initial zoom level of the map.
- * - `points`: Array of MapPoint objects to display on the map.
- */
 export const MapComponent: React.FC<MapComponentProps> = ({
   children,
   zoom,
@@ -55,13 +48,35 @@ export const MapComponent: React.FC<MapComponentProps> = ({
   const popupContainer = useRef<HTMLDivElement | null>(null);
   const popupClose = useRef<HTMLAnchorElement | null>(null);
   const overlay = useRef<Overlay | null>(null);
+  const mapRef = useRef<Map | null>(null); // Store the map instance
 
   useEffect(() => {
+    const container = popupContainer.current as HTMLDivElement;
+    const closer = popupClose.current as HTMLAnchorElement;
+
+    overlay.current = new Overlay({
+      element: container,
+      autoPan: {
+        animation: {
+          duration: 250,
+        },
+      },
+    });
+
+    closer.onclick = function () {
+      clearActivePoint();
+      overlay.current?.setPosition(undefined);
+      closer.blur();
+      return false;
+    };
+
+    // Create a vector source and layer
     const vectorSource = new VectorSource();
     const vectorLayer = new VectorLayer({
       source: vectorSource,
     });
 
+    // Create features from the points
     const features = points.map((point) => {
       const feature = new Feature({
         geometry: new Point(fromLonLat([point.longitude, point.latitude])),
@@ -81,8 +96,10 @@ export const MapComponent: React.FC<MapComponentProps> = ({
       return feature;
     });
 
+    //  Add the features to the source
     vectorSource.addFeatures(features);
 
+    // Get the extent of the points
     const extent = vectorSource.getExtent();
     const centerCoords = getCenter(extent);
 
@@ -91,29 +108,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
       source: new OSM(),
     });
 
-    if (!overlay.current) {
-      overlay.current = new Overlay({
-        element: popupContainer.current as HTMLElement,
-        autoPan: {
-          animation: {
-            duration: 250,
-          },
-        },
-      });
-
-      const closer = popupClose.current;
-      if (closer) {
-        closer.onclick = function () {
-          clearActivePoint();
-          overlay.current?.setPosition(undefined);
-          closer.blur();
-          return false;
-        };
-      } else {
-        console.error('No popup closer found');
-      }
-    }
-
+    // Create the map instance
     const map = new Map({
       target: mapId.current as HTMLElement,
       layers: [osmLayer, vectorLayer],
@@ -132,6 +127,9 @@ export const MapComponent: React.FC<MapComponentProps> = ({
       interactions: defaultInteractions().extend([new DblClickDragZoom()]),
     });
 
+    mapRef.current = map;
+
+    // center the map on the points
     if (features.length > 0) {
       map.getView().fit(extent, {
         size: map.getSize(),
@@ -146,8 +144,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
         (feature) => feature
       );
       if (feature) {
-        // @ts-ignore
-        const pointValues = feature.values_;
+        const pointValues = feature.getProperties();
         setActivePoint({
           id: pointValues.id,
           details: pointValues.details,
@@ -166,11 +163,13 @@ export const MapComponent: React.FC<MapComponentProps> = ({
     };
 
     map.on('singleclick', handleMapClick);
+
     setMap(map);
 
     return () => {
-      if (!map) return;
-      map.setTarget(undefined);
+      if (mapRef.current) {
+        mapRef.current.setTarget(undefined);
+      }
       destroyMap();
     };
   }, [points, setMap, destroyMap, zoom, setActivePoint, clearActivePoint]);
@@ -181,14 +180,17 @@ export const MapComponent: React.FC<MapComponentProps> = ({
         {children}
       </div>
 
-      <div ref={popupContainer} id='popup' className='ol-popup'>
-        <a
-          ref={popupClose}
-          href='#'
-          id='popup-closer'
-          className='ol-popup-closer'
-        ></a>
+      <div ref={popupContainer} id='popup' className='ol-popup relative'>
         <Popup />
+
+        <a
+          href='#'
+          ref={popupClose}
+          id='popup-closer'
+          className='cursor-pointer absolute top-4 right-4'
+        >
+          <CloseIcon />
+        </a>
       </div>
     </>
   );

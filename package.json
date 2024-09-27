@@ -10,15 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@types/ol": "^7.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "install": "^0.13.0",
     "lucide-react": "^0.441.0",
+    "next-themes": "^0.3.0",
     "ol": "^10.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "zustand": "5.0.0-rc.2"
