@@ -4,15 +4,23 @@
 
 This project is a mini-map application built with **React**, **TypeScript**, and **Tailwind CSS**. It utilizes **OpenLayers** for rendering **OpenStreetMap**, showcasing various features and providing an adaptive front-end interface.
 
-## General Requirements
+Live Demo: [offline-map.vercel.app](https://offline-map.vercel.app)
 
-- **Stack**: React JS, TypeScript, and Tailwind CSS
-- **Version Control**: Git, with the project hosted on GitHub
-- **Adaptive Design**: Mobile and desktop support (tablet not required)
-- **Technical Focus**: Solution structure and architecture
-- **Pictures**: Include front-end screenshots in the README
 
-## Task Description
+### Basic Commands
+To install the project dependencies:
+```bash
+pnpm install
+```
+To run the project in development mode:
+```bash
+pnpm run dev
+```
+
+To run end-to-end tests:
+```bash
+pnpm run test
+```
 
 ### Features Implemented
 
@@ -25,6 +33,10 @@ This project is a mini-map application built with **React**, **TypeScript**, and
 - ✅ **Offline Mode**: The app functions offline, allowing refresh.
 - ✅ **Local Storage**: Remembers changes to status and comments.
 - ✅ **PWA Support**: Configured for iOS/Android compatibility.
-- ❌ **End-to-End Test**: Basic test cases to validate functionality.
+- ✅ **End-to-End Test**: Basic test cases to validate functionality.
+
+### UI Shots
+
+![UI Thumbnail](./public/thumb.png)
 
 
