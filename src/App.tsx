@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { loadFromLocalStorage } from '@/lib/utils';
 import useMapStore from '@/store/mapStore';
 import { points as defaultPoints } from '@/lib/data'; 
-// import { MapComponent } from './components/map';
+import { MapComponent } from './components/mapComponent';
 
 function App() {
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
@@ -39,7 +39,7 @@ function App() {
           You are currently offline.
         </div>
       )}
-      {/* <MapComponent zoom={8} points={useMapStore.getState().points} /> */}
+      <MapComponent zoom={8} points={useMapStore.getState().points} />
     </div>
   );
 }
