@@ -1,5 +1,5 @@
 export type MapPoint = {
-  id?: number;
+  id: string;
   latitude: number;
   longitude: number;
   status: boolean;
@@ -13,580 +13,335 @@ export const points: MapPoint[] = [
     longitude: 58.674264,
     status: true,
     details: 'Great service, very satisfied!',
+    id: 'f613a419-c88b-4852-af76-14b1b12b8613',
   },
   {
     latitude: 24.603167,
     longitude: 58.898495,
     status: false,
     details: 'Service was delayed, not happy.',
+    id: 'b41f0021-e696-48c2-99b9-b1673a4e5464',
   },
   {
     latitude: 24.16843,
     longitude: 59.310752,
     status: true,
     details: 'Excellent experience, will use again.',
+    id: '23daa2a7-47e3-4cb5-8917-b49d7775028d',
   },
   {
     latitude: 24.450599,
     longitude: 58.713636,
     status: true,
     details: 'Friendly staff, quick response.',
+    id: '1ede706b-c71a-47d4-b791-d3c462f13382',
   },
   {
     latitude: 24.371046,
     longitude: 59.301575,
     status: false,
     details: 'Had issues with the service, needs improvement.',
+    id: '5da82c52-879a-4544-8ed7-c5f2a5a8b391',
   },
   {
     latitude: 24.141558,
     longitude: 58.620945,
     status: true,
     details: 'Very professional and timely.',
+    id: '39e2def3-93eb-41ca-aa8d-89adc31c5cdc',
   },
   {
     latitude: 25.833778,
     longitude: 58.716681,
     status: false,
     details: 'Not satisfied, would not recommend.',
+    id: '9fb11a8a-f883-4296-8b9e-0041dd2900da',
   },
   {
     latitude: 26.731192,
     longitude: 59.325441,
     status: true,
     details: 'Fantastic job, very pleased!',
+    id: '4e54a12c-958e-4b38-8fa1-33fe811cc008',
   },
   {
     latitude: 25.780517,
     longitude: 59.089217,
     status: false,
     details: 'Communication was poor, not impressed.',
+    id: '9058def8-7688-4def-a6d7-3204cdf9d8b4',
   },
   {
     latitude: 25.746746,
     longitude: 59.173674,
     status: true,
     details: 'Service was efficient and effective.',
+    id: '65c77f3f-3661-4806-af40-62b181fa4821',
   },
   {
     latitude: 25.034276,
     longitude: 59.013401,
     status: true,
     details: 'Very helpful, great customer service.',
+    id: '8300a3c5-66c0-4d41-8f69-e7c222c58961',
   },
   {
     latitude: 26.470379,
     longitude: 58.552247,
     status: false,
     details: 'Had to wait too long, not happy.',
+    id: 'b85f5f61-7c4d-48b1-bc2d-ee9feb290838',
   },
   {
     latitude: 25.930247,
     longitude: 58.570008,
     status: true,
     details: 'Prompt and courteous service.',
+    id: 'd30553db-4ecf-4ff9-bc7a-9b547bccb164',
   },
   {
     latitude: 25.365225,
     longitude: 58.987725,
     status: false,
     details: 'Service was below expectations.',
+    id: '6a0079a5-d85c-4dc5-bc14-94c7b772e1b6',
   },
   {
     latitude: 24.935202,
     longitude: 59.115927,
     status: true,
     details: 'Very satisfied with the quick turnaround.',
+    id: 'e882d18c-cf40-462f-b294-0f11f56a1354',
   },
   {
     latitude: 26.430256,
     longitude: 58.735546,
     status: true,
     details: 'Good experience, would recommend.',
+    id: '45b4b2c7-f81e-44ba-a15a-8c4a39dc68af',
   },
   {
     latitude: 25.904312,
     longitude: 59.114292,
     status: false,
     details: 'Issues with service quality, not satisfied.',
+    id: '62cfe248-3518-41b8-8d94-f3a69e251f62',
   },
   {
     latitude: 25.792348,
     longitude: 59.096543,
     status: true,
     details: 'Service was excellent, very professional.',
+    id: 'd7837f15-f94a-4968-a95a-f134787965f8',
   },
   {
     latitude: 24.518023,
     longitude: 58.513342,
     status: false,
     details: 'Not what I expected, needs improvement.',
+    id: 'ffd6339d-aca1-4498-b0e9-a30193ffca8c',
   },
   {
     latitude: 25.278237,
     longitude: 58.477057,
     status: true,
     details: 'Great job, very efficient.',
+    id: 'f5b4626f-618a-4dcb-a5e7-7a10e4ccb725',
   },
   {
     latitude: 25.97559,
     longitude: 58.890219,
     status: true,
     details: 'Very responsive, good service.',
+    id: '64a1580d-f519-4af4-9796-62b2dc2b4b02',
   },
   {
     latitude: 24.90384,
     longitude: 59.293623,
     status: false,
     details: 'Service was disappointing, not recommended.',
+    id: 'c2aa3cfb-a49f-4060-9be3-323ab377aad9',
   },
   {
     latitude: 26.571781,
     longitude: 59.133753,
     status: true,
     details: 'Quick and efficient, very pleased.',
+    id: '7c234498-a0f4-4181-868a-abe82c173d3d',
   },
   {
     latitude: 26.825068,
     longitude: 58.743903,
     status: false,
     details: 'Service took too long, not happy.',
+    id: '055d23ce-dae1-4be4-9902-333c63ff6c1a',
   },
   {
     latitude: 26.577091,
     longitude: 59.25373,
     status: true,
     details: 'Very professional and reliable.',
+    id: 'ab9323a5-fdf6-43ba-957d-91bfb7f4f3c3',
   },
   {
     latitude: 25.369384,
     longitude: 59.093461,
     status: true,
     details: 'Friendly and efficient service.',
+    id: 'dbab2af0-553e-4f05-8d7a-670e02aae735',
   },
   {
     latitude: 26.314301,
     longitude: 58.994217,
     status: false,
     details: 'Service was not up to the mark.',
+    id: 'b4d60a15-aaeb-4da8-aed8-e8af632d4d90',
   },
   {
     latitude: 25.797374,
     longitude: 58.537458,
     status: true,
     details: 'Satisfied with the service provided.',
+    id: 'bece178d-abbd-4409-bfc6-3a1096a8e9f9',
   },
   {
     latitude: 25.60091,
     longitude: 58.680638,
     status: false,
     details: 'Communication was lacking, not happy.',
+    id: '58f8805b-fc12-41f3-9490-99c464c529ba',
   },
   {
     latitude: 26.375976,
     longitude: 59.199492,
     status: true,
     details: 'Excellent customer service, very happy.',
+    id: '6b04902d-d434-4336-b38e-3fdded645ef4',
   },
   {
     latitude: 25.93279,
     longitude: 58.54432,
     status: true,
     details: 'Service exceeded expectations.',
+    id: '6240e04a-3db6-4a38-a2fa-7b18342d0db1',
   },
   {
     latitude: 26.471267,
     longitude: 58.863546,
     status: false,
     details: 'Disappointed with the service, would not recommend.',
+    id: '3ad1ccff-247a-4e4c-b0a0-29848eddb3b8',
   },
   {
     latitude: 25.783936,
     longitude: 59.010458,
     status: true,
     details: 'Very efficient and prompt service.',
+    id: '94d1388e-8fc6-4dd2-9ebe-9e5dad3313cf',
   },
   {
     latitude: 26.563927,
     longitude: 58.944737,
     status: false,
     details: 'Service quality was poor, not satisfied.',
+    id: 'dee21aca-08f4-4f01-b8af-cfc307d2b46f',
   },
   {
     latitude: 24.420313,
     longitude: 58.95752,
     status: true,
     details: 'Service was good, met expectations.',
+    id: 'b93aba26-b4bd-4189-9af9-24fb7cdc6d2c',
   },
   {
     latitude: 26.250209,
     longitude: 59.092931,
     status: false,
     details: 'Not happy with the service provided.',
+    id: '3db7bb68-eee0-42df-a556-366301c6e628',
   },
   {
     latitude: 24.880904,
     longitude: 58.618664,
     status: true,
     details: 'Very satisfied with the overall experience.',
+    id: '7b22a7f7-9ff9-456d-bc95-70d4f647506a',
   },
   {
     latitude: 24.071776,
     longitude: 59.029391,
     status: true,
     details: 'Great customer service, very pleased.',
+    id: 'fe25bc5c-40b2-4ee8-aa2a-5bb554895fd1',
   },
   {
     latitude: 26.660852,
     longitude: 58.616018,
     status: false,
     details: 'Had issues with the timing of service.',
+    id: 'f81cca47-f9bb-45c2-a3bd-0bace40c778d',
   },
   {
     latitude: 24.658983,
     longitude: 58.775929,
     status: true,
     details: 'Service was prompt and efficient.',
+    id: 'a820c531-4153-485c-86d4-2c04c099b625',
   },
   {
     latitude: 26.039513,
     longitude: 58.671455,
     status: false,
     details: 'Service quality could be improved.',
+    id: '887d3c17-dd74-4bdc-8bda-1209ba16b86e',
   },
   {
     latitude: 24.573154,
     longitude: 58.976613,
     status: true,
     details: 'Very happy with the service provided.',
+    id: 'cb54ff1b-f264-421e-a6c0-457824e34836',
   },
   {
     latitude: 24.362336,
     longitude: 58.956102,
     status: false,
     details: 'Not satisfied with the overall experience.',
+    id: '86572a1d-55c3-4bae-8ed1-bb8a1bdc243d',
   },
   {
     latitude: 24.106042,
     longitude: 59.331453,
     status: true,
     details: 'Service was excellent, will use again.',
+    id: '0eddcab2-95cb-4988-8830-50e1a570689d',
   },
   {
     latitude: 26.792589,
     longitude: 58.434062,
     status: false,
     details: 'Service did not meet expectations.',
+    id: '933edab5-d517-4164-ba8d-bfeb12812988',
   },
   {
     latitude: 24.086809,
     longitude: 58.428617,
     status: true,
     details: 'Good service, friendly staff.',
+    id: 'fcc72a9a-5016-4aba-8b0c-fac100ab8300',
   },
   {
     latitude: 25.599046,
     longitude: 58.679712,
     status: true,
     details: 'Great service, very professional.',
+    id: 'fda3ded8-c094-466a-9584-e2b1f7360a37',
   },
   {
     latitude: 24.254756,
     longitude: 59.239888,
     status: false,
     details: 'Service was below expectations.',
+    id: 'fb6716eb-4627-45a0-84ba-e648e392ccd8',
   },
 ];
-
-// {
-//     "coordinates": [
-//       {
-//         "latitude": 25.543009,
-//         "longitude": 58.674264,
-//         "status": true,
-//         "details": "Great service, very satisfied!"
-//       },
-//       {
-//         "latitude": 24.603167,
-//         "longitude": 58.898495,
-//         "status": false,
-//         "details": "Service was delayed, not happy."
-//       },
-//       {
-//         "latitude": 24.168430,
-//         "longitude": 59.310752,
-//         "status": true,
-//         "details": "Excellent experience, will use again."
-//       },
-//       {
-//         "latitude": 24.450599,
-//         "longitude": 58.713636,
-//         "status": true,
-//         "details": "Friendly staff, quick response."
-//       },
-//       {
-//         "latitude": 24.371046,
-//         "longitude": 59.301575,
-//         "status": false,
-//         "details": "Had issues with the service, needs improvement."
-//       },
-//       {
-//         "latitude": 24.141558,
-//         "longitude": 58.620945,
-//         "status": true,
-//         "details": "Very professional and timely."
-//       },
-//       {
-//         "latitude": 25.833778,
-//         "longitude": 58.716681,
-//         "status": false,
-//         "details": "Not satisfied, would not recommend."
-//       },
-//       {
-//         "latitude": 26.731192,
-//         "longitude": 59.325441,
-//         "status": true,
-//         "details": "Fantastic job, very pleased!"
-//       },
-//       {
-//         "latitude": 25.780517,
-//         "longitude": 59.089217,
-//         "status": false,
-//         "details": "Communication was poor, not impressed."
-//       },
-//       {
-//         "latitude": 25.746746,
-//         "longitude": 59.173674,
-//         "status": true,
-//         "details": "Service was efficient and effective."
-//       },
-//       {
-//         "latitude": 25.034276,
-//         "longitude": 59.013401,
-//         "status": true,
-//         "details": "Very helpful, great customer service."
-//       },
-//       {
-//         "latitude": 26.470379,
-//         "longitude": 58.552247,
-//         "status": false,
-//         "details": "Had to wait too long, not happy."
-//       },
-//       {
-//         "latitude": 25.930247,
-//         "longitude": 58.570008,
-//         "status": true,
-//         "details": "Prompt and courteous service."
-//       },
-//       {
-//         "latitude": 25.365225,
-//         "longitude": 58.987725,
-//         "status": false,
-//         "details": "Service was below expectations."
-//       },
-//       {
-//         "latitude": 24.935202,
-//         "longitude": 59.115927,
-//         "status": true,
-//         "details": "Very satisfied with the quick turnaround."
-//       },
-//       {
-//         "latitude": 26.430256,
-//         "longitude": 58.735546,
-//         "status": true,
-//         "details": "Good experience, would recommend."
-//       },
-//       {
-//         "latitude": 25.904312,
-//         "longitude": 59.114292,
-//         "status": false,
-//         "details": "Issues with service quality, not satisfied."
-//       },
-//       {
-//         "latitude": 25.792348,
-//         "longitude": 59.096543,
-//         "status": true,
-//         "details": "Service was excellent, very professional."
-//       },
-//       {
-//         "latitude": 24.518023,
-//         "longitude": 58.513342,
-//         "status": false,
-//         "details": "Not what I expected, needs improvement."
-//       },
-//       {
-//         "latitude": 25.278237,
-//         "longitude": 58.477057,
-//         "status": true,
-//         "details": "Great job, very efficient."
-//       },
-//       {
-//         "latitude": 25.975590,
-//         "longitude": 58.890219,
-//         "status": true,
-//         "details": "Very responsive, good service."
-//       },
-//       {
-//         "latitude": 24.903840,
-//         "longitude": 59.293623,
-//         "status": false,
-//         "details": "Service was disappointing, not recommended."
-//       },
-//       {
-//         "latitude": 26.571781,
-//         "longitude": 59.133753,
-//         "status": true,
-//         "details": "Quick and efficient, very pleased."
-//       },
-//       {
-//         "latitude": 26.825068,
-//         "longitude": 58.743903,
-//         "status": false,
-//         "details": "Service took too long, not happy."
-//       },
-//       {
-//         "latitude": 26.577091,
-//         "longitude": 59.253730,
-//         "status": true,
-//         "details": "Very professional and reliable."
-//       },
-//       {
-//         "latitude": 25.369384,
-//         "longitude": 59.093461,
-//         "status": true,
-//         "details": "Friendly and efficient service."
-//       },
-//       {
-//         "latitude": 26.314301,
-//         "longitude": 58.994217,
-//         "status": false,
-//         "details": "Service was not up to the mark."
-//       },
-//       {
-//         "latitude": 25.797374,
-//         "longitude": 58.537458,
-//         "status": true,
-//         "details": "Satisfied with the service provided."
-//       },
-//       {
-//         "latitude": 25.600910,
-//         "longitude": 58.680638,
-//         "status": false,
-//         "details": "Communication was lacking, not happy."
-//       },
-//       {
-//         "latitude": 26.375976,
-//         "longitude": 59.199492,
-//         "status": true,
-//         "details": "Excellent customer service, very happy."
-//       },
-//       {
-//         "latitude": 25.932790,
-//         "longitude": 58.544320,
-//         "status": true,
-//         "details": "Service exceeded expectations."
-//       },
-//       {
-//         "latitude": 26.471267,
-//         "longitude": 58.863546,
-//         "status": false,
-//         "details": "Disappointed with the service, would not recommend."
-//       },
-//       {
-//         "latitude": 25.783936,
-//         "longitude": 59.010458,
-//         "status": true,
-//         "details": "Very efficient and prompt service."
-//       },
-//       {
-//         "latitude": 26.563927,
-//         "longitude": 58.944737,
-//         "status": false,
-//         "details": "Service quality was poor, not satisfied."
-//       },
-//       {
-//         "latitude": 24.420313,
-//         "longitude": 58.957520,
-//         "status": true,
-//         "details": "Service was good, met expectations."
-//       },
-//       {
-//         "latitude": 26.250209,
-//         "longitude": 59.092931,
-//         "status": false,
-//         "details": "Not happy with the service provided."
-//       },
-//       {
-//         "latitude": 24.880904,
-//         "longitude": 58.618664,
-//         "status": true,
-//         "details": "Very satisfied with the overall experience."
-//       },
-//       {
-//         "latitude": 24.071776,
-//         "longitude": 59.029391,
-//         "status": true,
-//         "details": "Great customer service, very pleased."
-//       },
-//       {
-//         "latitude": 26.660852,
-//         "longitude": 58.616018,
-//         "status": false,
-//         "details": "Had issues with the timing of service."
-//       },
-//       {
-//         "latitude": 24.658983,
-//         "longitude": 58.775929,
-//         "status": true,
-//         "details": "Service was prompt and efficient."
-//       },
-//       {
-//         "latitude": 26.039513,
-//         "longitude": 58.671455,
-//         "status": false,
-//         "details": "Service quality could be improved."
-//       },
-//       {
-//         "latitude": 24.573154,
-//         "longitude": 58.976613,
-//         "status": true,
-//         "details": "Very happy with the service provided."
-//       },
-//       {
-//         "latitude": 24.362336,
-//         "longitude": 58.956102,
-//         "status": false,
-//         "details": "Not satisfied with the overall experience."
-//       },
-//       {
-//         "latitude": 24.106042,
-//         "longitude": 59.331453,
-//         "status": true,
-//         "details": "Service was excellent, will use again."
-//       },
-//       {
-//         "latitude": 26.792589,
-//         "longitude": 58.434062,
-//         "status": false,
-//         "details": "Service did not meet expectations."
-//       },
-//       {
-//         "latitude": 24.086809,
-//         "longitude": 58.428617,
-//         "status": true,
-//         "details": "Good service, friendly staff."
-//       },
-//       {
-//         "latitude": 25.599046,
-//         "longitude": 58.679712,
-//         "status": true,
-//         "details": "Great service, very professional."
-//       },
-//       {
-//         "latitude": 24.254756,
-//         "longitude": 59.239888,
-//         "status": false,
-//         "details": "Service was below expectations."
-//       }
-//       ]
-//    }

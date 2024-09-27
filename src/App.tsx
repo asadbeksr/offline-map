@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
-import MapComponent from './components/Map';
+import { MapComponent } from './components/map';
+import { loadFromLocalStorage } from './lib/utils';
+import useMapStore from './store/mapStore';
+import { points as defaultPoints } from './lib/data'; // Import default points
 
 function App() {
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
+  const { setPoints } = useMapStore();
 
   useEffect(() => {
     const updateOnlineStatus = () => setIsOffline(!navigator.onLine);
@@ -16,19 +20,26 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    // Load points from local storage
+    const storedPoints = loadFromLocalStorage('points');
+
+    // Check if there are stored points; if not, set default points
+    if (!storedPoints || storedPoints.length === 0) {
+      setPoints(defaultPoints); // Set default points if no stored points
+    } else {
+      setPoints(storedPoints); // Set stored points
+    }
+  }, [setPoints]);
+
   return (
-    <div>
-       {isOffline && (
+    <div className='app-container'>
+      {isOffline && (
         <div className='bg-red-500 text-white font-bold fixed z-10 bottom-0 w-full h-10 mx-auto flex justify-center self-center items-center'>
           You are currently offline.
         </div>
       )}
-
-      <MapComponent />
-      <div id='popup' className='ol-popup' style={{ backgroundColor: '#fff' }}>
-        <a href='#' id='popup-closer' className='ol-popup-closer'></a>
-        <div id='popup-content'></div>
-      </div>
+      <MapComponent zoom={8} points={useMapStore.getState().points} />
     </div>
   );
 }

@@ -1,47 +1,61 @@
-import { useEffect } from 'react';
-
-import { Feature, Map, Overlay, View } from 'ol';
-import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
+import React, { useEffect, useRef } from 'react';
+import Map from 'ol/Map';
+import View from 'ol/View';
 import 'ol/ol.css';
-import Style from 'ol/style/Style';
-import Icon from 'ol/style/Icon';
+import useMapStore from '@/store/mapStore';
+import TileLayer from 'ol/layer/Tile';
+import { OSM } from 'ol/source';
+import { MapPoint } from '@/lib/data';
+import { fromLonLat } from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
+import { Feature, Overlay } from 'ol';
 import { Point } from 'ol/geom';
-import { fromLonLat, toLonLat } from 'ol/proj';
-import { toStringHDMS } from 'ol/coordinate';
+import Style from 'ol/style/Style';
+import Icon from 'ol/style/Icon';
+import ActiveIcon from '/icons/active.svg';
+import InactiveIcon from '/icons/inactive.svg';
 import { getCenter } from 'ol/extent';
+import {
+  FullScreen,
+  OverviewMap,
+  ZoomSlider,
+  defaults as defaultControls,
+} from 'ol/control.js';
+import {
+  DblClickDragZoom,
+  defaults as defaultInteractions,
+} from 'ol/interaction.js';
+import Popup from './ui/popup';
 
-import { points } from '../lib/data';
-
-import ActiveIcon from '../../public/icons/active.svg';
-import InactiveIcon from '../../public/icons/inactive.svg';
+interface MapComponentProps {
+  children?: React.ReactNode;
+  zoom: number;
+  points?: MapPoint[];
+}
 
 /**
- * MapComponent is a React functional component that renders an interactive map using OpenLayers.
- * 
- * @component
- * @example
- * return (
- *   <MapComponent />
- * )
- * 
- * @description
- * This component initializes a map with a vector layer and an OSM tile layer. It adds features to the vector layer based on the `points` array, 
- * each represented by a marker with a custom icon depending on its status. The map view is centered and zoomed to fit the extent of the features.
- * 
- * The component also includes a popup overlay that displays information about a feature when it is clicked. The popup shows the name, status, 
- * and coordinates of the clicked feature.
- * 
- * @returns {JSX.Element} A JSX element containing the map and popup elements.
- * 
- * @hook
- * The component uses the `useEffect` hook to initialize the map and its layers, add features, and set up the popup overlay. The cleanup function 
- * in `useEffect` ensures that the map target is unset when the component is unmounted.
+ * MapComponent renders an interactive map using OpenLayers.
+ *
+ * Props:
+ * - `children`: Optional child components to render.
+ * - `zoom`: Initial zoom level of the map.
+ * - `points`: Array of MapPoint objects to display on the map.
  */
+export const MapComponent: React.FC<MapComponentProps> = ({
+  children,
+  zoom,
+  points = [],
+}) => {
+  const setMap = useMapStore((state) => state.populateMap);
+  const destroyMap = useMapStore((state) => state.removeMap);
+  const setActivePoint = useMapStore((state) => state.setActivePoint);
+  const clearActivePoint = useMapStore((state) => state.clearActivePoint);
+  const mapId = useRef<HTMLDivElement | null>(null);
+  const popupContainer = useRef<HTMLDivElement | null>(null);
+  const popupClose = useRef<HTMLAnchorElement | null>(null);
+  const overlay = useRef<Overlay | null>(null);
 
-function MapComponent() {
   useEffect(() => {
     const vectorSource = new VectorSource();
     const vectorLayer = new VectorLayer({
@@ -51,8 +65,9 @@ function MapComponent() {
     const features = points.map((point) => {
       const feature = new Feature({
         geometry: new Point(fromLonLat([point.longitude, point.latitude])),
-        name: point.details,
+        details: point.details,
         status: point.status,
+        id: point.id,
       });
 
       const markerStyle = new Style({
@@ -68,21 +83,53 @@ function MapComponent() {
 
     vectorSource.addFeatures(features);
 
+    const extent = vectorSource.getExtent();
+    const centerCoords = getCenter(extent);
+
     const osmLayer = new TileLayer({
       preload: Infinity,
       source: new OSM(),
     });
 
-    const extent = vectorSource.getExtent();
-    const center = getCenter(extent);
+    if (!overlay.current) {
+      overlay.current = new Overlay({
+        element: popupContainer.current as HTMLElement,
+        autoPan: {
+          animation: {
+            duration: 250,
+          },
+        },
+      });
+
+      const closer = popupClose.current;
+      if (closer) {
+        closer.onclick = function () {
+          clearActivePoint();
+          overlay.current?.setPosition(undefined);
+          closer.blur();
+          return false;
+        };
+      } else {
+        console.error('No popup closer found');
+      }
+    }
 
     const map = new Map({
-      target: 'map',
+      target: mapId.current as HTMLElement,
       layers: [osmLayer, vectorLayer],
       view: new View({
-        center: center.length ? center : fromLonLat([69.240562, 41.311081]),
-        zoom: 4,
+        center: centerCoords.length
+          ? centerCoords
+          : fromLonLat([69.240562, 41.311081]),
+        zoom,
       }),
+      overlays: [overlay.current],
+      controls: defaultControls().extend([
+        new FullScreen(),
+        new OverviewMap(),
+        new ZoomSlider(),
+      ]),
+      interactions: defaultInteractions().extend([new DblClickDragZoom()]),
     });
 
     if (features.length > 0) {
@@ -93,75 +140,56 @@ function MapComponent() {
       });
     }
 
-    const container = document.getElementById('popup');
-    const content = document.getElementById('popup-content');
-    const closer = document.getElementById('popup-closer');
-
-    if (container) {
-      const overlay = new Overlay({
-        element: container,
-        autoPan: true,
-      });
-
-      map.addOverlay(overlay);
-
-      if (closer) {
-        closer.onclick = function () {
-          overlay.setPosition(undefined);
-          closer.blur();
-          return false;
-        };
-      }
-
-      // handle clicks on features
-      map.on('singleclick', function (evt) {
-        const feature = map.forEachFeatureAtPixel(
-          evt.pixel,
-          function (feature) {
-            return feature;
-          }
-        );
-
-        if (feature) {
-          const geometry = feature.getGeometry();
-          if (geometry && geometry instanceof Point) {
-            const coordinates = geometry.getCoordinates();
-            const name = feature.get('name');
-            const status = feature.get('status');
-
-            if (content) {
-              content.innerHTML = `<p>${name}</p><p>Status: ${
-                status ? 'Active' : 'Inactive'
-              }</p><p>You clicked here:</p><code>${toStringHDMS(
-                toLonLat(coordinates)
-              )}</code>`;
-            }
-            overlay.setPosition(coordinates);
-          }
-        } else {
-          overlay.setPosition(undefined);
-          closer?.blur();
+    const handleMapClick = (evt: any) => {
+      const feature = map.forEachFeatureAtPixel(
+        evt.pixel,
+        (feature) => feature
+      );
+      if (feature) {
+        // @ts-ignore
+        const pointValues = feature.values_;
+        setActivePoint({
+          id: pointValues.id,
+          details: pointValues.details,
+          status: pointValues.status,
+          longitude: pointValues.geometry.flatCoordinates[0],
+          latitude: pointValues.geometry.flatCoordinates[1],
+        });
+        const geometry = feature.getGeometry();
+        if (geometry && geometry instanceof Point) {
+          overlay.current?.setPosition(geometry.getCoordinates());
         }
-      });
-    }
+      } else {
+        clearActivePoint();
+        overlay.current?.setPosition(undefined);
+      }
+    };
 
-    return () => map.setTarget(undefined);
-  }, []);
+    map.on('singleclick', handleMapClick);
+    setMap(map);
+
+    return () => {
+      if (!map) return;
+      map.setTarget(undefined);
+      destroyMap();
+    };
+  }, [points, setMap, destroyMap, zoom, setActivePoint, clearActivePoint]);
 
   return (
-    <div>
-      <div
-        style={{ height: '100vh', width: '100vw' }}
-        id='map'
-        className='map-container'
-      />
-
-      <div id='popup' className='ol-popup' style={{ backgroundColor: '#fff' }}>
-        <a href='#' id='popup-closer' className='ol-popup-closer'></a>
-        <div id='popup-content'></div>
+    <>
+      <div ref={mapId} id='map' className='h-[100vh] w-full'>
+        {children}
       </div>
-    </div>
-  );
-}
 
-export default MapComponent;
+      <div ref={popupContainer} id='popup' className='ol-popup'>
+        <a
+          ref={popupClose}
+          href='#'
+          id='popup-closer'
+          className='ol-popup-closer'
+        ></a>
+        <Popup />
+      </div>
+    </>
+  );
+};
