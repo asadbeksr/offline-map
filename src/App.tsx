@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { MapComponent } from './components/map';
-import { loadFromLocalStorage } from './lib/utils';
-import useMapStore from './store/mapStore';
-import { points as defaultPoints } from './lib/data'; // Import default points
+import { MapComponent } from '@/components/map';
+import { loadFromLocalStorage } from '@/lib/utils';
+import useMapStore from '@/store/mapStore';
+import { points as defaultPoints } from '@/lib/data'; // Import default points
 
 function App() {
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
