@@ -184,6 +184,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
         <Popup />
 
         <a
+          data-cy='popup-close'
           href='#'
           ref={popupClose}
           id='popup-closer'

@@ -8,7 +8,6 @@ const Popup: React.FC = () => {
   const activePoint = useMapStore((state) => state.activePoint);
   const updatePoint = useMapStore((state) => state.updatePoint);
 
-  // Local state for details and status
   const [details, setDetails] = useState(activePoint?.details || '');
   const [status, setStatus] = useState(activePoint?.status || false);
 
@@ -17,10 +16,10 @@ const Popup: React.FC = () => {
       setDetails(activePoint.details);
       setStatus(activePoint.status);
     }
-  }, [activePoint]); // Reset state when activePoint changes
+  }, [activePoint]); 
 
   if (!activePoint) {
-    return null; // If no point is active, return null
+    return null; 
   }
 
   const handleDetailsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,21 +31,21 @@ const Popup: React.FC = () => {
   };
 
   const handleSave = () => {
-    // Update the point with the current values in local state
     updatePoint({ id: activePoint.id, details, status });
   };
 
   return (
     <div className='pb-2'>
       <div className='flex justify-between items-center mb-2'>
-        <h2 className='text-lg font-semibold'>Edit Point</h2>
+        <h2 className='text-lg font-semibold'>Edit Comment</h2>
       </div>
       <div className='mb-4'>
         <label className='block text-sm font-medium mb-1'>
           Comment:
           <Input
+            data-cy='comment-input'
             type='text'
-            value={details} // Controlled input
+            value={details} 
             onChange={handleDetailsChange}
             className='mt-1 block w-full border rounded-md p-2 shadow-sm focus:ring focus:ring-blue-300'
           />
@@ -55,16 +54,17 @@ const Popup: React.FC = () => {
       <div className='mb-4'>
         <label className='flex items-center gap-1'>
           <Checkbox
+            data-cy='status-checkbox'
             checked={status}
             onCheckedChange={handleStatusChange}
             className='mr-2'
           />
           <span className='text-sm font-medium'>
-            {status ? 'Active' : 'Inactive'}
+            {status ? 'Positive' : 'Negative'}
           </span>
         </label>
       </div>
-      <Button onClick={handleSave} className='w-full'>
+      <Button onClick={handleSave} className='w-full' data-cy='save-button'>
         Save
       </Button>
     </div>
